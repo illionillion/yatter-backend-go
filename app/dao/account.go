@@ -37,3 +37,20 @@ func (r *account) FindByUsername(ctx context.Context, username string) (*object.
 
 	return entity, nil
 }
+
+func(r *account) CreateAccount (account object.Account) (error)  {
+	// entity := new(object.Account)
+	tx, _ := r.db.Begin()
+	// トランザクションの接続で操作を実行
+	if _, err := tx.Exec(`insert into account (username, password_hash) values (?, ?)`, account.Username, account.PasswordHash); err != nil {
+		// 失敗だったら終了へ
+		return fmt.Errorf("インサート失敗：%w", err)
+	}
+	
+	if err := tx.Commit(); err != nil {
+		// 失敗したら終了処理へ
+		return fmt.Errorf("コミット失敗：%w", err)
+	}
+
+	return nil
+}
