@@ -35,7 +35,7 @@ func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 
 	// panic("Must Implement Account Registration")
 	
-	// ここでアカウント登録の処理？
+	// ここでアカウント登録の処理
 	if err := h.ar.CreateAccount(*account); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
