@@ -39,7 +39,7 @@ func (r *account) FindByUsername(ctx context.Context, username string) (*object.
 }
 
 func(r *account) CreateAccount (account object.Account) (error)  {
-	// entity := new(object.Account)
+	
 	tx, _ := r.db.Begin()
 	// トランザクションの接続で操作を実行
 	if _, err := tx.Exec(`insert into account (username, password_hash) values (?, ?)`, account.Username, account.PasswordHash); err != nil {
