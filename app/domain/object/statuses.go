@@ -13,7 +13,3 @@ type Statuses struct {
 
 	CreateAt time.Time `json:"create_at,omitempty" db:"create_at"`
 }
-
-func newStatusCreate()  {
-	
-}
