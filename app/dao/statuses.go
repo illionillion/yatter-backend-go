@@ -1,6 +1,9 @@
 package dao
 
 import (
+	"context"
+	"database/sql"
+	"errors"
 	"fmt"
 	"yatter-backend-go/app/domain/object"
 	"yatter-backend-go/app/domain/repository"
@@ -18,6 +21,21 @@ type (
 // Create accout repository
 func NewStatuses(db *sqlx.DB) repository.Statuses {
 	return &statuses{db: db}
+}
+
+// FindByStatusId : 投稿IDから投稿を取得
+func (r *statuses) FindByStatusId(ctx context.Context, statusId int) (*object.Statuses, error) {
+	entity := new(object.Statuses)
+	err := r.db.QueryRowxContext(ctx, "select * from statuses where id = ?", statusId).StructScan(entity)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, nil
+		}
+
+		return nil, fmt.Errorf("failed to find status from db: %w", err)
+	}
+
+	return entity, nil
 }
 
 func(r *statuses) CreateStatus (statuses object.Statuses) (error) {

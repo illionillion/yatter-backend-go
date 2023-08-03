@@ -38,6 +38,21 @@ func (r *account) FindByUsername(ctx context.Context, username string) (*object.
 	return entity, nil
 }
 
+// FindByAccountId : ユーザIDからユーザを取得
+func (r *account) FindByAccountId(ctx context.Context, accountId int) (*object.Account, error) {
+	entity := new(object.Account)
+	err := r.db.QueryRowxContext(ctx, "select * from account where id = ?", accountId).StructScan(entity)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, nil
+		}
+
+		return nil, fmt.Errorf("failed to find account from db: %w", err)
+	}
+
+	return entity, nil
+}
+
 func(r *account) CreateAccount (account object.Account) (error)  {
 	
 	tx, _ := r.db.Begin()

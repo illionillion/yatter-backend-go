@@ -11,5 +11,5 @@ type Statuses struct {
 
 	Content *string `json:"content"`
 
-	CreateAt time.Time `json:"create_at,omitempty" db:"create_at"`
+	CreateAt time.Time `json:"create_at,omitempty" db:"created_at"`
 }

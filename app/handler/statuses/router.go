@@ -21,6 +21,7 @@ func NewRouter(ar repository.Account, sr repository.Statuses) http.Handler {
 	h := &handler{ar, sr}
 	// Withでミドルウェアを噛ませる
 	r.With(auth.Middleware(ar)).Post("/", h.Create)
+	r.Get("/{statusID}", h.GetStatus)
 
 	return r
 }

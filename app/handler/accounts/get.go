@@ -10,8 +10,6 @@ func (h *handler) GetUser(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	username := r.URL.Path[len("/v1/accounts/"):]
-	println("Path:", r.URL.Path)
-	println("username:", username)
 
 	if account, err := h.ar.FindByUsername(ctx, username); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
