@@ -10,6 +10,11 @@ func (h *handler) Public(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	// パラメータ取得、ハンドリング
+	println("only_media", r.FormValue("only_media"))
+	println("max_id", r.FormValue("max_id"))
+	println("since_id", r.FormValue("since_id"))
+	println("limit", r.FormValue("limit"))
+	
 	// SQL実行
 	if statuses, err := h.tr.GetPublic(ctx); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
