@@ -26,7 +26,7 @@ func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 	account := new(object.Account)  // Account型のオブジェクト作成
 	account.Username = req.Username // ユーザー名セット
 
-	println("パスワード is:", account.CheckPassword(req.Password)) // パスワードのバリデーションチェック？
+	// println("パスワード is:",account.CheckPassword(req.Password)) // パスワードのバリデーションチェック？
 
 	if err := account.SetPassword(req.Password); err != nil { // パスワードセット、SetPassword内でハッシュ化の処理してる
 		http.Error(w, err.Error(), http.StatusInternalServerError)
