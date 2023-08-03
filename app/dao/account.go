@@ -53,8 +53,8 @@ func (r *account) FindByAccountId(ctx context.Context, accountId int) (*object.A
 	return entity, nil
 }
 
-func(r *account) CreateAccount (account object.Account) (error)  {
-	
+func (r *account) CreateAccount(account object.Account) error {
+
 	tx, _ := r.db.Begin()
 	// トランザクションの接続で操作を実行
 	if _, err := tx.Exec(`insert into account (username, password_hash) values (?, ?)`, account.Username, account.PasswordHash); err != nil {
@@ -62,7 +62,7 @@ func(r *account) CreateAccount (account object.Account) (error)  {
 		// 失敗だったら終了へ
 		return fmt.Errorf("インサート失敗：%w", err)
 	}
-	
+
 	if err := tx.Commit(); err != nil {
 		// 失敗したら終了処理へ
 		return fmt.Errorf("コミット失敗：%w", err)

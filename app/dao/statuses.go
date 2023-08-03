@@ -38,7 +38,7 @@ func (r *statuses) FindByStatusId(ctx context.Context, statusId int) (*object.St
 	return entity, nil
 }
 
-func(r *statuses) CreateStatus (statuses object.Statuses) (error) {
+func (r *statuses) CreateStatus(statuses object.Statuses) error {
 	tx, _ := r.db.Begin()
 	// トランザクションの接続で操作を実行
 	if _, err := tx.Exec(`insert into statuses (account_id, content) values (?, ?)`, statuses.AccountId, statuses.Content); err != nil {
@@ -51,7 +51,6 @@ func(r *statuses) CreateStatus (statuses object.Statuses) (error) {
 		// 失敗したら終了処理へ
 		return fmt.Errorf("コミット失敗：%w", err)
 	}
-
 
 	return nil
 }

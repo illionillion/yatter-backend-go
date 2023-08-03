@@ -23,7 +23,7 @@ func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	account := new(object.Account) // Account型のオブジェクト作成
+	account := new(object.Account)  // Account型のオブジェクト作成
 	account.Username = req.Username // ユーザー名セット
 
 	// println("パスワード is:",account.CheckPassword(req.Password)) // パスワードのバリデーションチェック？
@@ -34,7 +34,7 @@ func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// panic("Must Implement Account Registration")
-	
+
 	// ここでアカウント登録の処理
 	if err := h.ar.CreateAccount(*account); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

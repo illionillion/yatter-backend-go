@@ -1,28 +1,28 @@
-package accounts
+package timeline
 
 import (
 	"encoding/json"
 	"net/http"
-
-	"github.com/go-chi/chi/v5"
 )
 
-// /v1/accounts/[username]
-func (h *handler) GetUser(w http.ResponseWriter, r *http.Request) {
+func (h *handler) Public(w http.ResponseWriter, r *http.Request) {
+
 	ctx := r.Context()
 
-	username := chi.URLParam(r, "userName")
-	if account, err := h.ar.FindByUsername(ctx, username); err != nil {
+	// パラメータ取得、ハンドリング
+	// SQL実行
+	if statuses, err := h.tr.GetPublic(ctx); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
-	} else if account == nil {
+	} else if statuses == nil {
 		http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 		return
 	} else {
 		w.Header().Set("Content-Type", "application/json")
-		if err := json.NewEncoder(w).Encode(account); err != nil {
+		if err := json.NewEncoder(w).Encode(statuses.Statuses); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	}
+
 }
