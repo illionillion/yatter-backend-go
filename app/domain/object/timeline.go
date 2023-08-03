@@ -1,5 +1,5 @@
 package object
 
 type TimeLine struct {
-	Statuses []Statuses
+	Statuses []Statuses `json:"statuses"`
 }

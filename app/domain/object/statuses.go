@@ -5,7 +5,7 @@ import "time"
 type Statuses struct {
 	ID int64 `json:"id,omitempty"`
 
-	Account *Account `json:"account,omitempty" db:"account"`
+	Account Account `json:"account,omitempty" db:"account"`
 
 	AccountId int64 `json:"-" db:"account_id"`
 

@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-func (h *handler) Public(w http.ResponseWriter, r *http.Request)  {
-	
+func (h *handler) Public(w http.ResponseWriter, r *http.Request) {
+
 	ctx := r.Context()
 
 	// パラメータ取得、ハンドリング
@@ -19,7 +19,7 @@ func (h *handler) Public(w http.ResponseWriter, r *http.Request)  {
 		return
 	} else {
 		w.Header().Set("Content-Type", "application/json")
-		if err := json.NewEncoder(w).Encode(statuses); err != nil {
+		if err := json.NewEncoder(w).Encode(statuses.Statuses); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}

@@ -6,5 +6,5 @@ import (
 )
 
 type TimeLine interface {
-	GetPublic (ctx context.Context) (*object.TimeLine, error)
+	GetPublic(ctx context.Context) (*object.TimeLine, error)
 }

@@ -13,7 +13,7 @@ type handler struct {
 	tr repository.TimeLine
 }
 
-func NewRouter(ar repository.Account, sr repository.Statuses, tr repository.TimeLine) http.Handler  {
+func NewRouter(ar repository.Account, sr repository.Statuses, tr repository.TimeLine) http.Handler {
 	r := chi.NewRouter()
 
 	h := &handler{ar, sr, tr}
