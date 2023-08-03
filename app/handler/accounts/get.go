@@ -3,14 +3,15 @@ package accounts
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 // /v1/accounts/[username]
 func (h *handler) GetUser(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	username := r.URL.Path[len("/v1/accounts/"):]
-
+	username := chi.URLParam(r, "userName")
 	if account, err := h.ar.FindByUsername(ctx, username); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
