@@ -4,7 +4,9 @@ import (
 	"net/http"
 	"strconv"
 )
-
+/*
+GETのクエリパラメータを返す
+*/
 func GetParams(r *http.Request) (only_media bool, max_id int, since_id int, limit int) {
 	// パラメータ取得、ハンドリング
 	only_media = false
