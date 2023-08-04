@@ -3,6 +3,7 @@ package timeline
 import (
 	"net/http"
 	"yatter-backend-go/app/domain/repository"
+	"yatter-backend-go/app/handler/auth"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -17,7 +18,7 @@ func NewRouter(ar repository.Account, sr repository.Statuses, tr repository.Time
 	r := chi.NewRouter()
 
 	h := &handler{ar, sr, tr}
-	// r.With(auth.Middleware(ar)).Get("/home", h.Home)
+	r.With(auth.Middleware(ar)).Get("/home", h.Home)
 	r.Get("/public", h.Public)
 
 	return r

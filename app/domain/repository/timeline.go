@@ -7,4 +7,5 @@ import (
 
 type TimeLine interface {
 	GetPublic(ctx context.Context, only_media bool, max_id int, since_id int, limit int) (*object.TimeLine, error)
+	GetHome(ctx context.Context, accountId int, only_media bool, max_id int, since_id int, limit int) (*object.TimeLine, error)
 }
